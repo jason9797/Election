@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+
+<head>
+
+<!-- meta tags -->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="author" content="Granthweb">
+<meta name="description" content="Modern Business Template">
+<meta name="robots" content="index, follow">
+
+<!-- favicon -->
+<link rel="icon" href="../static/home/assets/images/favicon.png" type="image/png">
+
+<!-- page title -->
+<title>学生投票系统</title>
+
+<!-- css stylesheets -->
+<link rel="stylesheet" href="../static/home/assets/css/style.css" type="text/css" media="all">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Merriweather" type="text/css" media="all">
+
+<!-- js -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script>google.load("jquery", "1.6");</script>
+
+<script type="text/javascript" src="../static/home/assets/js/scripts.js"></script>
+<script type="text/javascript" src="../static/home/assets/js/blog.js"></script>
+<script type="text/javascript" src="../static/home/assets/plugin/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../static/home/assets/plugin/js/jquery.lavalamp-1.3.5.min.js"></script>
+
+<!-- style & theme switcher -->
+<link rel="stylesheet" href="../static/home/styles/switcher.css" type="text/css" media="all">
+<script type="text/javascript" src="../static/home/styles/styleswitcher.js"></script>
+<script type="text/javascript" src="../static/home/styles/switch.js"></script>
+<script type="text/javascript">
+
+function ajax_get_json(job)
+{
+    var container = $('#image_container');
+    container.html("loading...");
+    $.get('{%url 'ajax_get_json'%}',{job:job},function(ret) {
+        container.html(ret);
+    });
+}
+
+function ajax_get_json_to_html(job)
+{
+    var container = $('#image_container');
+    $.getJSON('{%url 'ajax_get_json'%}',{job:job}, function(ret) {
+        data=""
+        jQuery.each(ret,function(i){
+            data+='<div class="portfolio-item-wrapper last">'+
+                    '<div class="portfolio-item" data-id="1" data-tags="illustration">'+
+                                	'<img width="210" height="150" src='+"../media/"+ret[i].fields.photo+'>'+
+                                    '<a href='+"../election/info/"+ret[i].pk+'>'+
+                                    '</a>'+
+                    '</div>'+
+                   '</div>'
+
+
+            });
+        container.html(data);
+    });
+}
+</script>
+ <script type="text/javascript">
+$(document).ready(function(){
+  $("li").click(function(){
+    $("li").removeClass();
+    $(this).addClass('current')
+  });
+});
+</script>
+</head>
+
+<body id="top">
+<!--<div id="image_container"></div>-->
+<!-- BEGIN #wrapper -->
+<div id="wrapper">
+
+    <!-- BEGIN #header -->
+    <div id="header" class="wrapper">
+        <div class="container clearfix">
+        	
+            <!-- BEGIN #logo -->
+            <div id="logo"><a href="../static/home/assets/images/sitelogo.png"><img src="../static/home/assets/images/sitelogo.png" width="222" height="99" alt="Granth"></a></div>
+            <!-- END #logo -->
+            
+            <!-- BEGIN #page-number & #page-info -->
+            <div id="page-number">欢迎</div>
+            <div id="page-info">
+                <div id="page-title">
+                    <h1>{{user}}</h1>
+                    <span class="title-desc"><a href="/changepassword/{{user}}">修改密码</a>
+     			<a href="/login">退出</a></span></div>
+                <div id="preloader" class="preloader"></div>
+            </div>
+            <!-- END #page-number & #page-info -->            
+            
+            <!-- BEGIN #ribbon -->
+            <div id="ribbon"></div>
+            <!-- END #ribbon -->
+            
+        </div>
+    </div>
+    <!-- END #header --> 
+    
+    <!-- BEGIN #main -->
+    <div id="main" class="wrapper">
+        <div class="container clearfix"> 
+            
+            <!-- BEGIN #sidebar -->
+            <div id="sidebar" class="aside"> 
+                
+                <!-- BEGIN #navigation -->
+                <ul id="navigation">
+                    <li><a href=""><span class="menu-number">00</span> 主页 <span class="menu-desc">投票入口</span></a></li>
+                    <li><a href="../election/create"><span class="menu-number">01</span> 竞选 <span class="menu-desc">竞选入口</span></a></li>
+                    <li><a href="../election/result"><span class="menu-number">02</span> 查看结果 <span class="menu-desc">教师入口</span></a>
+                       </li>
+
+                
+            </div>
+            <!-- END #sidebar --> 
+            
+            <!-- BEGIN #main-content -->
+			<div id="main-content" class="content clearfix"> 
+            
+                <!-- BEGIN HOME page content -->
+                <div id="portfolio">
+
+                	<!-- BEGIN .post (project) -->
+                    <div class="post project"></div>
+                    
+                    <div class="inner-content">
+                        <h2 class="outer-bordered title">请珍惜你手中的一票 <br>投给你心目中的人选</h2>
+                        
+                        <!-- BEGIN #portfolio-filter -->
+                        <ul id="portfolio-filter" class="clearfix">
+                            <li><a href="javascript:ajax_get_json_to_html('班长')">班长<span class="tooltip">42</span></a></li>
+                            <li><a href="javascript:ajax_get_json_to_html('副班长')" >副班长<span class="tooltip">6</span></a></li>
+                            <li><a href="javascript:ajax_get_json_to_html('团支书')">团支书<span class="tooltip">6</span></a></li>
+                            <li><a href="javascript:ajax_get_json_to_html('学习委员')">学习委员<span class="tooltip">8</span></a></li>
+                            <li><a href="javascript:ajax_get_json_to_html('体育委员')">体育委员<span class="tooltip">4</span></a></li>
+                            <li><a href="javascript:ajax_get_json_to_html('生活委员')">生活委员<span class="tooltip">9</span></a></li>
+                            <li><a href="javascript:ajax_get_json_to_html('文艺委员')">文艺委员<span class="tooltip">16</span></a></li>
+                        </ul>
+                        <!-- END #portfolio-filter -->
+                        
+                    </div>
+                    <!-- BEGIN #portfolio-content -->
+                    <div id="portfolio-content">
+
+                        <!-- BEGIN .portfolio-items -->
+                        <div class="portfolio-items clearfix" data-page="1">
+                        
+                        	<!-- BEGIN .portfolio-item-wrapper (portfolio-item) -->
+                            <div id="image_container">
+                            </div>
+                        </div>
+
+                    <!-- END #portfolio-content -->
+                </div>
+                <!-- END HOME page content -->
+                
+            </div>   
+            <!-- END #main-content --> 
+            
+        </div>
+    </div>
+    <!-- END #main --> 
+    
+    <!-- BEGIN #footer -->
+    
+    <!-- END #footer -->
+</div>
+<!-- END #wrapper -->
+
+
+</body>
+</html>

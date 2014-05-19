@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统登录</title>
+<link href="../static/test/css/login.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all" />
+<link href="../static/test/css/demo.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="../static/test/js/jquery1.42.min.js"></script>
+<script type="text/javascript" src="../static/test/js/jquery.SuperSlide.js"></script>
+<script type="text/javascript" src="../static/test/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#captcha_refresh').click(function() {
+                $.get("{% url 'captcha.views.captcha_refresh' %}", function(data) {
+                    var image_url = "{% url 'captcha-image' 0 %}"
+                    image_url = image_url.replace('/0', '/' + data);
+                    $('#id_captcha_image').attr('src', image_url);
+                    $('#id_captcha_0').val(data);
+                    $('#id_captcha_1').val('');
+                });
+            });
+        });
+    </script>
+
+
+
+</head>
+
+<body>
+
+<div class="header">
+    <h1 class="headerLogo">
+        <a title="用户登录"><img alt="logo" src="../static/test/images/logo1.gif"></a>
+    </h1>
+</div>
+<div class="banner">
+
+<div class="login-aside">
+  <div id="o-box-up"></div>
+  <div id="o-box-down"  style="table-layout:fixed;">
+   <div class="error-box"></div>
+   {% for item in error %}
+		<p style="color:red;">{{item}}</p>
+	{% endfor %}
+   <form action="" method="post">
+   <div class="fm-item">
+	   <label for="logonId" class="form-label">用户名：</label>
+	   {{ form.username }}    
+       <div class="ui-form-explain"></div>
+  </div>
+  
+  <div class="fm-item">
+	   <label for="logonId" class="form-label">登陆密码：</label>
+	   {{ form.password }} 
+       <div class="ui-form-explain"></div>
+  </div>
+  
+  <div class="fm-item pos-r">
+	   <label for="logonId" class="form-label">验证码</label>
+	   {{ form.captcha }}
+  </div>
+  <div>
+      <input type="submit" name="submit" id="captcha_refresh" value="看不清，换一个试试" />
+  </div>
+  
+  <div class="fm-item">
+	   <label for="logonId" class="form-label"></label>
+	   <input type="submit" value="" tabindex="4" id="send-btn" class="btn-login">
+       <div class="ui-form-explain"></div>
+       <input type="button" tabindex="4" class="btn-register" onclick="location.href='../register'">
+  </div>
+  
+  </form>
+  
+  </div>
+
+</div>
+
+	<!--><div class="bd">
+		<ul>
+			<li style="background:url(../static/test/themes/theme-pic1.jpg) #CCE1F3 center 0 no-repeat;"><a target="_blank"></a></li>
+			<li style="background:url(../static/test/themes/theme-pic2.jpg) #BCE0FF center 0 no-repeat;"><a target="_blank"></a></li>
+		</ul>
+	</div><!-->
+
+	<!--><div class="hd"><ul></ul></div>
+</div><!-->
+<!--><script type="text/javascript">jQuery(".banner").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click" });</script>
+
+
+<div class="banner-shadow"></div><!-->
+
+<div class="footer">
+</div>
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>

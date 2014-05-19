@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+
+<head>
+
+<!-- meta tags -->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="author" content="Granthweb">
+<meta name="description" content="Modern Business Template">
+<meta name="robots" content="index, follow">
+
+<!-- favicon -->
+<link rel="icon" href="../../static/home/assets/images/favicon.png" type="image/png">
+
+<!-- page title -->
+<title>学生投票系统</title>
+
+<!-- css stylesheets -->
+<link rel="stylesheet" href="../../static/home/assets/css/style.css" type="text/css" media="all">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Merriweather" type="text/css" media="all">
+
+<!-- js -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../static/home/assets/js/scripts.js"></script>
+<script type="text/javascript" src="../../static/home/assets/plugin/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../../static/home/assets/plugin/js/jquery.lavalamp-1.3.5.min.js"></script>
+
+<!-- style & theme switcher -->
+<link rel="stylesheet" href="../../static/home/styles/switcher.css" type="text/css" media="all">
+<script type="text/javascript" src="../../static/home/styles/styleswitcher.js"></script>
+<script type="text/javascript" src="../../static/home/styles/switch.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script>google.load("jquery", "1.6");</script>
+<script type="text/javascript">
+
+function vote_ajax_info_to_html(user,job,name)
+{
+    <!--var container = $('#image_container');-->
+    $.getJSON('{%url 'vote_ajax_info'%}',{user:user,job:job,name:name}, function(ret) {
+        if(ret=='1'){
+		alert('你已经投过票了');
+            <!--container.html('你已经投过票了');-->
+        }
+        else if(ret=='2'){
+            alert('投票成功');
+            <!--container.html("投票成功！");-->
+        }
+        else{
+            alert('系统错误');
+            <!--container.html('系统错误');-->
+        }
+    });
+}
+
+</script>
+
+
+</head>
+
+<body id="top">
+<!-- BEGIN #wrapper -->
+<div id="wrapper">
+
+    <!-- BEGIN #header -->
+    <div id="header" class="wrapper">
+        <div class="container clearfix">
+        	
+            <!-- BEGIN #logo -->
+            <div id="logo"><a href="../static/home/assets/images/sitelogo.png"><img src="../../static/home/assets/images/sitelogo.png" width="222" height="99" alt="Granth"></a></div>
+            <!-- END #logo -->
+            
+            <!-- BEGIN #page-number & #page-info -->
+            <div id="page-number">投票</div>
+            <div id="page-info">
+                <div id="page-title">
+                    <h1>{{User}}</h1>
+                    <span class="title-desc"><a href="/changepassword/{{User}}">修改密码</a>
+     			<a href="/login">退出</a></span></div>
+                <div id="preloader" class="preloader"></div>
+            </div>
+            <!-- END #page-number & #page-info -->            
+            
+            <!-- BEGIN #ribbon -->
+            <div id="ribbon"></div>
+            <!-- END #ribbon -->
+            
+        </div>
+    </div>
+    <!-- END #header --> 
+    
+    <!-- BEGIN #main -->
+    <div id="main" class="wrapper">
+        <div class="container clearfix"> 
+            
+            <!-- BEGIN #sidebar -->
+            <div id="sidebar" class="aside"> 
+                
+                <!-- BEGIN #navigation -->
+                <ul id="navigation">
+                    <li><a href="../../homepage"><span class="menu-number">00</span> 主页 <span class="menu-desc">投票入口</span></a></li>
+                    <li><a href="../../election/create"><span class="menu-number">01</span> 竞选 <span class="menu-desc">竞选入口</span></a></li>
+                    <li ><a href="../../election/result"><span class="menu-number">02</span>查看结果 <span class="menu-desc">教师入口</span></a>
+                        </li>
+                <!-- END #navigation --> 
+                
+                <!-- BEGIN #searchbox -->
+                <!-- END #searchbox --> 
+                
+                <!-- BEGIN #widgets -->
+                <div id="widgets">
+                
+					<!-- BEGIN widget (portfolio slider) -->
+                    <div class="widget-container">
+                        <div class="widget-slider">
+                        
+                            <!-- BEGIN .portfolio-items -->
+                            <ul class="portfolio-items slides">
+                                <!-- BEGIN .portfolio-item (slide) -->
+                                
+                                <!-- END .portfolio-item (slide) -->
+                                
+                                <!-- BEGIN .portfolio-item (slide) -->
+                                
+                                <!-- END .portfolio-item (slide) -->
+                                
+                                <!-- BEGIN .portfolio-item (slide) -->
+                                
+                                <!-- END .portfolio-item (slide) -->
+                                
+                                <!-- BEGIN .portfolio-item (slide) -->
+                                
+                                <!-- END .portfolio-item (slide) -->
+                                
+                                <!-- BEGIN .portfolio-item (slide) -->
+                                
+                                
+                            </ul>
+                            <!-- END .portfolio-items -->
+                        
+                        </div>
+                    </div>
+                    <!-- END widget (portfolio slider) -->
+                    
+                    <!-- BEGIN widget (latest tweets) -->
+                    <!-- END widget (latest tweets) -->
+                   
+                </div>
+                <!-- END #widgets -->
+                
+            </div>
+            <!-- END #sidebar --> 
+            
+            <!-- BEGIN #main-content -->
+			<div id="main-content" class="content clearfix"> 
+            
+                <!-- BEGIN HOME page content -->
+                <div id="portfolio">
+
+                	<!-- BEGIN .post (project) -->
+                    <div class="post project"></div>
+
+			 {% for item in posts %}
+                 <form action="" method="post">
+                 <div class="create_name">
+                   <label for="id_name">姓名:</label>
+                  <input maxlength="100" name="name" type="text" value='{{ item.name }}' readonly="readonly"/>
+            		</div>
+                <!--<h1>竞选人: <input type="text" value='{{ item.name }}' readonly="readonly"></h1>-->
+                 <div class="alignright">
+                     <img src="../../../media/{{ item.photo }}" width="105" height="105"/>
+                 </div>
+                 <div class="create_number">
+                   <label for="id_number">学号:</label>
+                  <input maxlength="100" name="name" type="text" value='{{ item.number }}' readonly="readonly"/>
+            		</div>
+                  <div class="create_Class">
+                   <label for="id_Class">班级:</label>
+                  <input maxlength="100" name="name" type="text" value='{{ item.Class }}' readonly="readonly"/>
+            		</div>
+                  <div class="create_job">
+                   <label for="id_job">职务:</label>
+                  <input maxlength="100" name="name" type="text" value='{{ item.job }}' readonly="readonly"/>
+            		</div>
+                  <div class="create_reason">
+                   <label for="id_reason">竞选理由:</label>
+            		</div>
+                  <div>
+                      <textarea cols="40" id="id_reason" name="reason" rows="10" readonly="readonly">{{ item.reason}}</textarea>
+                  </div>
+		        <div>
+		        <video controls="controls" src="{{ item.video }}" ></video>
+                </div>
+                <!--<a href="javascript:vote_ajax_info('{{ User }}','{{ item.job }}','{{ item.name }}')">
+                   测试1</a>-->
+                <a href="javascript:vote_ajax_info_to_html('{{ User }}','{{ item.job }}','{{ item.name }}')" class="vote_button">
+                   </a>
+                </form>
+                {% endfor %}
+                       
+                    </div>
+                    <!-- END #portfolio-content -->
+                    
+                </div>
+                <!-- END HOME page content -->
+                
+            </div>   
+            <!-- END #main-content --> 
+            
+        </div>
+    </div>
+    <!-- END #main --> 
+    
+    <!-- BEGIN #footer -->
+    
+    <!-- END #footer -->
+    
+</div>
+<!-- END #wrapper -->
+<!--<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30938774-1']);
+  _gaq.push(['_setDomainName', 'granthweb.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>-->
+
+</body>
+</html>
